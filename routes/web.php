@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 */
 
 // ___ GET REQUESTS _________________________________________________________________
-Route::get('/', [ExampleController::class, "homepage"]);
+Route::get('/', [UserController::class, "showCorrectHomePage"]);
 Route::get('/about', [ExampleController::class, 'aboutpage']);
 //____________________________________________________________________________________
 

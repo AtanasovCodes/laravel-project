@@ -9,6 +9,15 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     //
+
+    public function showCorrectHomePage()
+    {
+        if (auth()->check()) {
+            $username = auth()->user()->username;
+            return  view('homepage-feed', ['username' => $username]);
+        }
+        return view('homepage');
+    }
     public function register(Request $request)
     {
         $incomingFields = $request->validate([
@@ -25,13 +34,14 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $incomingFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
+            'loginusername' => 'required',
+            'loginpassword' => 'required'
         ]);
-        $user = User::where('email', $incomingFields['email'])->first();
-        if (!$user || !password_verify($incomingFields['password'], $user->password)) {
+
+        if (auth()->attempt(['username' => $incomingFields['loginusername'], 'password' => $incomingFields['loginpassword']]) === false) {
             return 'Invalid credentials!';
         }
+        $request->session()->regenerate();
         return 'User logged in successfully!';
     }
 }
