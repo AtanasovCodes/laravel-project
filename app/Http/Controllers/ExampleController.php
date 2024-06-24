@@ -8,11 +8,11 @@ class ExampleController extends Controller
 {
     public function homepage()
     {
-        return 'Welcome to the homepage';
+        return view('homepage');
     }
 
     public function aboutpage()
     {
-        return 'Welcome to the aboutpage';
+        return view('single-post');
     }
 }
