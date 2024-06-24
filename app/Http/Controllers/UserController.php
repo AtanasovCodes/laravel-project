@@ -27,8 +27,9 @@ class UserController extends Controller
         ]);
         $hashedPassword = bcrypt($incomingFields['password']);
         $incomingFields['password'] = $hashedPassword;
-        User::create($incomingFields);
-        return 'User created successfully!';
+        $newUsers =  User::create($incomingFields);
+        auth()->login($newUsers);
+        return redirect('/')->with('success', 'Registered successfully!');
     }
 
     public function login(Request $request)
@@ -39,9 +40,15 @@ class UserController extends Controller
         ]);
 
         if (auth()->attempt(['username' => $incomingFields['loginusername'], 'password' => $incomingFields['loginpassword']]) === false) {
-            return 'Invalid credentials!';
+            return redirect('/')->with('failure', 'Invalid credentials!');
         }
         $request->session()->regenerate();
-        return 'User logged in successfully!';
+        return redirect('/')->with('success', 'Logged in successfully!');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/')->with('success', 'Logged out successfully!');
     }
 }
