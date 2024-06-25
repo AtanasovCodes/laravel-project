@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    //
+
+    public function viewSinglePost(Post $post)
+    {
+
+        return view('single-post', ['post' => $post]);
+    }
     public function storeNewPost(Request $request)
     {
         $incomingFileds = $request->validate([
@@ -19,8 +24,7 @@ class PostController extends Controller
         $incomingFileds['user_id'] = auth()->id();
 
         Post::create($incomingFileds);
-        return 'Post created successfully!';
-        // return redirect('/blog');
+        return redirect('/posts/' . Post::latest()->first()->id);
     }
     public function showCreateForm()
     {

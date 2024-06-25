@@ -30,7 +30,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 // BLOG ROUTES
 // ___ GET REQUESTS _________________________________________________________________
 Route::get('/create-post', [PostController::class, 'showCreateForm']);
-Route::get('/posts/{post}', [PostController::class, 'showCreateForm']);
+Route::get('/posts/{post}', [PostController::class, 'viewSinglePost']);
 //____________________________________________________________________________________
 // ___ POST REQUESTS ________________________________________________________________
 Route::post('/create-post', [PostController::class, 'storeNewPost']);
