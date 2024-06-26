@@ -18,20 +18,20 @@ use App\Http\Controllers\UserController;
 
 // USER ROUTES
 // ___ GET REQUESTS _________________________________________________________________
-Route::get('/', [UserController::class, "showCorrectHomePage"]);
+Route::get('/', [UserController::class, "showCorrectHomePage"])->name('login');
 //____________________________________________________________________________________
 // ___ POST REQUESTS ________________________________________________________________
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/register', [UserController::class, 'register'])->name('guest');
+Route::post('/login', [UserController::class, 'login'])->name('guest');
+Route::post('/logout', [UserController::class, 'logout'])->name('loggedIn');
 //____________________________________________________________________________________
 
 
 // BLOG ROUTES
 // ___ GET REQUESTS _________________________________________________________________
-Route::get('/create-post', [PostController::class, 'showCreateForm']);
+Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('loggedIn');
 Route::get('/posts/{post}', [PostController::class, 'viewSinglePost']);
 //____________________________________________________________________________________
 // ___ POST REQUESTS ________________________________________________________________
-Route::post('/create-post', [PostController::class, 'storeNewPost']);
+Route::post('/create-post', [PostController::class, 'storeNewPost'])->middleware('loggedIn');
 //____________________________________________________________________________________
