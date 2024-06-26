@@ -35,3 +35,8 @@ Route::get('/posts/{post}', [PostController::class, 'viewSinglePost']);
 // ___ POST REQUESTS ________________________________________________________________
 Route::post('/create-post', [PostController::class, 'storeNewPost'])->middleware('loggedIn');
 //____________________________________________________________________________________
+
+// PROFILE ROUTES
+// ___ GET REQUESTS _________________________________________________________________
+Route::get('/profile/{user:username}', [UserController::class, 'showProfile'])->middleware('loggedIn');
+//____________________________________________________________________________________
