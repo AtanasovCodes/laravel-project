@@ -16,7 +16,12 @@ use App\Http\Controllers\UserController;
 |
 */
 
+// ADMIN  ROUTES
+
+
+
 // USER ROUTES
+
 // ___ GET REQUESTS _________________________________________________________________
 Route::get('/', [UserController::class, "showCorrectHomePage"])->name('login');
 //____________________________________________________________________________________
@@ -26,8 +31,8 @@ Route::post('/login', [UserController::class, 'login'])->name('guest');
 Route::post('/logout', [UserController::class, 'logout'])->name('loggedIn');
 //____________________________________________________________________________________
 
-
 // POST ROUTES
+
 // ___ GET REQUESTS _________________________________________________________________
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('loggedIn');
 Route::get('/post/{post}', [PostController::class, 'viewSinglePost']);
@@ -44,6 +49,7 @@ Route::put('/post/{post}', [PostController::class, 'update'])->middleware('logge
 
 
 // PROFILE ROUTES
+
 // ___ GET REQUESTS _________________________________________________________________
 Route::get('/profile/{user:username}', [UserController::class, 'showProfile'])->middleware('loggedIn');
 //____________________________________________________________________________________
