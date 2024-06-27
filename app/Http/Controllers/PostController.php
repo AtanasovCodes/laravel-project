@@ -23,7 +23,7 @@ class PostController extends Controller
         $incomingFileds['title'] = strip_tags($incomingFileds['title']);
         $incomingFileds['body'] = strip_tags($incomingFileds['body']);
         $post->update($incomingFileds);
-        return redirect('/post/' . $post->id);
+        return redirect('/post/' . $post->id)->with('success', 'Post updated successfully!');
     }
 
     public function delete(Post $post)
