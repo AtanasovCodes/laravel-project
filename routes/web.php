@@ -27,14 +27,21 @@ Route::post('/logout', [UserController::class, 'logout'])->name('loggedIn');
 //____________________________________________________________________________________
 
 
-// BLOG ROUTES
+// POST ROUTES
 // ___ GET REQUESTS _________________________________________________________________
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('loggedIn');
-Route::get('/posts/{post}', [PostController::class, 'viewSinglePost']);
+Route::get('/post/{post}', [PostController::class, 'viewSinglePost']);
+Route::get('/post/{post}/edit', [PostController::class, 'showEditForm'])->middleware('loggedIn')->middleware('can:update,post');
 //____________________________________________________________________________________
 // ___ POST REQUESTS ________________________________________________________________
 Route::post('/create-post', [PostController::class, 'storeNewPost'])->middleware('loggedIn');
+// ___ DELETE REQUESTS ______________________________________________________________
+Route::delete('/post/{post}', [PostController::class, 'delete'])->middleware('loggedIn')->middleware('can:delete,post');
+// ___  PUT REQUESTS ________________________________________________________________
+Route::put('/post/{post}', [PostController::class, 'update'])->middleware('loggedIn')->middleware('can:update,post');
 //____________________________________________________________________________________
+
+
 
 // PROFILE ROUTES
 // ___ GET REQUESTS _________________________________________________________________

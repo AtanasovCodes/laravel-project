@@ -8,6 +8,30 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    public function showEditForm(Post $post)
+    {
+
+        return view('edit-post', ['post' => $post]);
+    }
+
+    public function update(Post $post)
+    {
+        $incomingFileds = request()->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+        ]);
+        $incomingFileds['title'] = strip_tags($incomingFileds['title']);
+        $incomingFileds['body'] = strip_tags($incomingFileds['body']);
+        $post->update($incomingFileds);
+        return redirect('/post/' . $post->id);
+    }
+
+    public function delete(Post $post)
+
+    {
+        $post->delete();
+        return redirect('/profile/' . auth()->user()->username)->with('success', 'Post deleted successfully!');
+    }
 
     public function viewSinglePost(Post $post)
     {
@@ -25,7 +49,7 @@ class PostController extends Controller
         $incomingFileds['user_id'] = auth()->id();
 
         Post::create($incomingFileds);
-        return redirect('/posts/' . Post::latest()->first()->id);
+        return redirect('/post/' . Post::latest()->first()->id);
     }
     public function showCreateForm()
     {

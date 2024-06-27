@@ -8,7 +8,8 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    //
+
+
 
     public function showCorrectHomePage()
     {
