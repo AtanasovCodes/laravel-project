@@ -24,7 +24,7 @@ use App\Http\Controllers\UserController;
 
 // ___ GET REQUESTS _________________________________________________________________
 Route::get('/', [UserController::class, "showCorrectHomePage"])->name('login');
-Route::get('/manage-avatar', [UserController::class, "showAvatarForm"])->name('login');
+Route::get('/manage-avatar', [UserController::class, "showAvatarForm"])->name('login')->middleware('loggedIn');
 //____________________________________________________________________________________
 // ___ POST REQUESTS ________________________________________________________________
 Route::post('/register', [UserController::class, 'register'])->name('guest');
