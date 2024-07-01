@@ -8,9 +8,16 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function storeAvatar(Request $request)
+    {
 
+        $request->file('avatar')->store('public/avatars');
+    }
 
-
+    public function showAvatarForm()
+    {
+        return view('avatar-form');
+    }
     public function showCorrectHomePage()
     {
         if (auth()->check()) {

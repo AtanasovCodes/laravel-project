@@ -24,11 +24,13 @@ use App\Http\Controllers\UserController;
 
 // ___ GET REQUESTS _________________________________________________________________
 Route::get('/', [UserController::class, "showCorrectHomePage"])->name('login');
+Route::get('/manage-avatar', [UserController::class, "showAvatarForm"])->name('login');
 //____________________________________________________________________________________
 // ___ POST REQUESTS ________________________________________________________________
 Route::post('/register', [UserController::class, 'register'])->name('guest');
 Route::post('/login', [UserController::class, 'login'])->name('guest');
 Route::post('/logout', [UserController::class, 'logout'])->name('loggedIn');
+Route::post('/manage-avatar', [UserController::class, "storeAvatar"])->name('login');
 //____________________________________________________________________________________
 
 // POST ROUTES
